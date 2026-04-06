@@ -1,5 +1,5 @@
 import { Image } from "expo-image";
-import { collection, getDocs, limit, query } from "firebase/firestore";
+import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 
@@ -12,6 +12,7 @@ import { Link } from "expo-router";
 
 type Conta = {
   id: string;
+  cod: number;
   nome?: string;
   saldo?: number;
   [key: string]: any;
@@ -25,7 +26,7 @@ export default function HomeScreen() {
   useEffect(() => {
     async function loadContas() {
       try {
-        const contasQuery = query(collection(db, "contas2025"), limit(5));
+        const contasQuery = query(collection(db, "contas2025"), limit(20), orderBy("cod", "asc"));
         const snapshot = await getDocs(contasQuery);
         const loadedContas = snapshot.docs.map((doc) => ({
           id: doc.id,
@@ -71,7 +72,7 @@ export default function HomeScreen() {
               <ThemedText type="defaultSemiBold">
                 {conta.conta ?? "Conta sem nome"}
               </ThemedText>
-              <ThemedText>{`ID: ${conta.id}`}</ThemedText>
+              <ThemedText>{`ID: ${conta.cod}`}</ThemedText>
               {conta.saldo !== undefined && (
                 <ThemedText>{`Saldo: ${conta.saldo}`}</ThemedText>
               )}
