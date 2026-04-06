@@ -16,6 +16,17 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npx expo start
    ```
 
+### Firebase setup
+
+1. Create a Firebase project at https://console.firebase.google.com/
+2. Add a Web app and copy the configuration values.
+3. Open `firebase.ts` and replace the placeholder fields with your Firebase config.
+4. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
 In the output, you'll find options to open the app in a
 
 - [development build](https://docs.expo.dev/develop/development-builds/introduction/)
